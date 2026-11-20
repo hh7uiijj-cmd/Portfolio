@@ -4,7 +4,8 @@ service firebase.storage {
     function isOwner() {
       return request.auth != null
         && request.auth.token.email == "hh7uiijj@gmail.com"
-        && request.auth.token.email_verified == true;
+        && (request.auth.token.email_verified == true
+            || request.auth.token.firebase.sign_in_provider == 'password');
     }
     // รูปและวิดีโอผลงาน: ทุกคนดูได้ อัปโหลด/ลบได้เฉพาะเจ้าของ (ไฟล์ละไม่เกิน 20 MB)
     match /portfolio/{file} {

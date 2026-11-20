@@ -826,9 +826,24 @@ $("#ownerBtn").onclick = async () => {
   if (!fb) return;
   try {
     if (user){ if (dirty){ toast("กดบันทึกหรือยกเลิกการแก้ไขก่อนออกจากระบบ"); return; } await fb.auth.signOut(); }
-    else await fb.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  } catch(e){ if (e && e.code !== "auth/popup-closed-by-user") toast("เข้าสู่ระบบไม่สำเร็จ: " + (e.message||e.code), 5000); }
+    else openLogin();
+  } catch(e){ toast("เข้าสู่ระบบไม่สำเร็จ: " + (e.message||e.code), 5000); }
 };
+function openLogin(){
+  const err = el("p",{class:"err"});
+  const email = el("input",{type:"email", id:"lg-email", value:OWNER_EMAIL, autocomplete:"username"});
+  const pass = el("input",{type:"password", id:"lg-pass", autocomplete:"current-password", placeholder:"รหัสผ่าน"});
+  const go = el("button",{class:"btn primary", type:"submit"}, "เข้าสู่ระบบ");
+  openOverlay(el("form",{class:"sheet narrow", onsubmit: async e => {
+      e.preventDefault(); err.textContent = ""; go.disabled = true;
+      try { await fb.auth.signInWithEmailAndPassword(email.value.trim(), pass.value); closeOverlay(); }
+      catch(x){ err.textContent = /invalid|wrong|user-not-found|credential/.test(x.code||"") ? "อีเมลหรือรหัสผ่านไม่ถูกต้อง" : "เข้าสู่ระบบไม่สำเร็จ: " + (x.code||x.message); go.disabled = false; pass.select(); }
+    }}, xBtn(),
+    el("div",{class:"form"}, el("h3",{text:"เข้าสู่ระบบเจ้าของเว็บ"}),
+      field("lg-email","อีเมล", email), field("lg-pass","รหัสผ่าน", pass), err,
+      el("div",{style:"display:flex;gap:10px;justify-content:flex-end"}, go))));
+  pass.focus();
+}
 
 (async () => {
   try {
@@ -843,7 +858,7 @@ $("#ownerBtn").onclick = async () => {
     } catch(e){ try { const r = await fetch("data.json", {cache:"no-store"}); if (r.ok) useData(await r.json()); } catch(_){} }
     fb.auth.onAuthStateChanged(u => {
       user = u;
-      canEdit = !!(u && u.email && u.email.toLowerCase() === OWNER_EMAIL && u.emailVerified);
+      canEdit = !!(u && u.email && u.email.toLowerCase() === OWNER_EMAIL && (u.emailVerified || (u.providerData||[]).some(p => p.providerId === "password")));
       $("#editToggle").hidden = !canEdit;
       if (!canEdit && editing) setEditing(false);
       renderOwnerBtn();
