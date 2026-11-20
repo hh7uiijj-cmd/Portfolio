@@ -1,0 +1,18 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isOwner() {
+      return request.auth != null
+        && request.auth.token.email == "hh7uiijj@gmail.com"
+        && request.auth.token.email_verified == true;
+    }
+    // รูปและวิดีโอผลงาน: ทุกคนดูได้ อัปโหลด/ลบได้เฉพาะเจ้าของ (ไฟล์ละไม่เกิน 20 MB)
+    match /portfolio/{file} {
+      allow read: if true;
+      allow delete: if isOwner();
+      allow create, update: if isOwner()
+        && request.resource.size < 20 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*|video/.*');
+    }
+  }
+}

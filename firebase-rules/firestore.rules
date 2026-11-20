@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isOwner() {
+      return request.auth != null
+        && request.auth.token.email == "hh7uiijj@gmail.com"
+        && request.auth.token.email_verified == true;
+    }
+    // ทุกคนอ่านพอร์ตได้ แต่เขียนได้เฉพาะเจ้าของ
+    match /portfolio/{doc} {
+      allow read: if true;
+      allow write: if isOwner();
+    }
+    match /{path=**} {
+      allow read, write: if false;
+    }
+  }
+}
