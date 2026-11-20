@@ -11,4 +11,4 @@ Settings → Pages → Deploy from a branch → `main` / `(root)` → Save
 3. Authentication → Settings → User actions → ปิด **Enable create (sign-up)** เพื่อกันคนอื่นสมัครบัญชีเอง
 4. Authentication → Settings → Authorized domains → เพิ่ม `hh7uiijj-cmd.github.io`
 5. คัดลอกกฎใน `firebase-rules/firestore.rules` ไปวางที่ Firestore → Rules และ `firebase-rules/storage.rules` ไปวางที่ Storage → Rules แล้วกด Publish
-6. เปิดเว็บ → ท้ายหน้ากด "เจ้าของเว็บ: เข้าสู่ระบบ" → ใส่รหัสผ่าน → "แก้ไขพอร์ต"
+6. เปิดเว็บ → ท้ายหน้ากด "หน้าต่างสำหรับแก้ไข" → ใส่รหัส → "แก้ไขพอร์ต"

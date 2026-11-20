@@ -279,7 +279,7 @@ body.has-bar{padding-bottom:84px}
 
   <footer class="foot">
     <span id="footNote">Daonuea ✦ · เว็บนี้และผลงานทั้งหมดสร้างด้วย AI</span>
-    <span>© Thanawat Sangnon · <button class="copy" id="ownerBtn" hidden style="color:var(--dim);font-weight:500">เจ้าของเว็บ: เข้าสู่ระบบ</button></span>
+    <span>© Thanawat Sangnon · <button class="copy" id="ownerBtn" hidden style="color:var(--dim);font-weight:500">หน้าต่างสำหรับแก้ไข</button></span>
   </footer>
 </div>
 
@@ -820,7 +820,7 @@ function renderOwnerBtn(){
   const b = $("#ownerBtn"); if (!b) return;
   if (!fb){ b.hidden = true; return; }
   b.hidden = false;
-  b.textContent = user ? (canEdit ? "ออกจากระบบ" : "ออกจากระบบ (บัญชีนี้แก้ไขไม่ได้)") : "เจ้าของเว็บ: เข้าสู่ระบบ";
+  b.textContent = user ? (canEdit ? "ออกจากหน้าต่างแก้ไข" : "ออกจากหน้าต่างแก้ไข") : "หน้าต่างสำหรับแก้ไข";
 }
 $("#ownerBtn").onclick = async () => {
   if (!fb) return;
@@ -831,16 +831,15 @@ $("#ownerBtn").onclick = async () => {
 };
 function openLogin(){
   const err = el("p",{class:"err"});
-  const email = el("input",{type:"email", id:"lg-email", value:OWNER_EMAIL, autocomplete:"username"});
-  const pass = el("input",{type:"password", id:"lg-pass", autocomplete:"current-password", placeholder:"รหัสผ่าน"});
-  const go = el("button",{class:"btn primary", type:"submit"}, "เข้าสู่ระบบ");
+  const pass = el("input",{type:"password", id:"lg-pass", autocomplete:"current-password", placeholder:"กรอกรหัส"});
+  const go = el("button",{class:"btn primary", type:"submit"}, "เข้าสู่หน้าต่างแก้ไข");
   openOverlay(el("form",{class:"sheet narrow", onsubmit: async e => {
       e.preventDefault(); err.textContent = ""; go.disabled = true;
-      try { await fb.auth.signInWithEmailAndPassword(email.value.trim(), pass.value); closeOverlay(); }
-      catch(x){ err.textContent = /invalid|wrong|user-not-found|credential/.test(x.code||"") ? "อีเมลหรือรหัสผ่านไม่ถูกต้อง" : "เข้าสู่ระบบไม่สำเร็จ: " + (x.code||x.message); go.disabled = false; pass.select(); }
+      try { await fb.auth.signInWithEmailAndPassword(OWNER_EMAIL, pass.value); closeOverlay(); }
+      catch(x){ err.textContent = /invalid|wrong|user-not-found|credential/.test(x.code||"") ? "รหัสไม่ถูกต้อง" : "เข้าสู่ระบบไม่สำเร็จ: " + (x.code||x.message); go.disabled = false; pass.select(); }
     }}, xBtn(),
-    el("div",{class:"form"}, el("h3",{text:"เข้าสู่ระบบเจ้าของเว็บ"}),
-      field("lg-email","อีเมล", email), field("lg-pass","รหัสผ่าน", pass), err,
+    el("div",{class:"form"}, el("h3",{text:"หน้าต่างสำหรับแก้ไข"}), el("p",{class:"hint", style:"margin:0;color:var(--muted)", text:"กรอกรหัสเพื่อเข้าแก้ไขพอร์ต"}),
+      field("lg-pass","รหัส", pass), err,
       el("div",{style:"display:flex;gap:10px;justify-content:flex-end"}, go))));
   pass.focus();
 }
