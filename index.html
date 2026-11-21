@@ -306,6 +306,12 @@ body.has-bar{padding-bottom:84px}
 .fcard-f .pitch{margin:0;color:#f1e6e8;font-size:17px;line-height:1.7}
 .fcard-f .more{margin-top:6px;color:#fff;font-weight:700;font-size:15px}
 @media (max-width:900px){.feat-grid{grid-template-columns:1fr}}
+
+.embed{position:relative;width:100%;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}
+.embed.narrow{max-width:360px;margin-inline:auto}
+.embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.embed-open{position:absolute;right:8px;bottom:8px;z-index:2;background:rgba(0,0,0,.65);color:#fff;font-size:12px;padding:4px 10px;border-radius:999px;opacity:0;transition:opacity .15s}
+.embed:hover .embed-open,.embed-open:focus{opacity:1}
 </style>
 
 </head>
@@ -547,7 +553,7 @@ function renderWorks(){
       if (!c) vis = el("div",{class:"linktile", text:w.title});
       else if (c.type === "image") vis = el("img",{src:src(c.src), alt:w.title, loading:"lazy", width:c.w||null, height:c.h||null});
       else if (c.type === "video") vis = el("video",{src:src(c.src)+"#t=0.1", muted:true, playsinline:true, preload:"metadata"});
-      else vis = el("div",{class:"linktile", text:"▶ " + (c.cap || "ดูวิดีโอ")});
+      else { const ei = embedInfo(c.src); vis = ei && ei.thumb ? el("img",{src:ei.thumb, alt:c.cap||w.title, loading:"lazy"}) : el("div",{class:"linktile", text:"▶ " + (c.cap || "ดูวิดีโอ")}); }
       m.append(el("button",{class:"gitem", onclick:()=>openLightbox(w,0)},
         editing ? editBtns(w, ws) : null,
         vis, c && c.type !== "image" ? el("span",{class:"play","aria-hidden":"true"}) : null,
@@ -579,9 +585,37 @@ function closeOverlay(){
   if (lastFocus && lastFocus.focus) lastFocus.focus();
 }
 const xBtn = () => el("button",{class:"x", "aria-label":"ปิด", onclick: closeOverlay}, "✕");
+/* ฝังคลิปจากลิงก์: รองรับ YouTube, Google Drive, Vimeo, TikTok, Facebook และไฟล์ .mp4/.webm โดยตรง (สร้าง URL ฝังจาก ID เท่านั้น) */
+function embedInfo(u){
+  let x; try { x = new URL(u); } catch(e){ return null; }
+  if (!/^https?:$/.test(x.protocol)) return null;
+  const host = x.hostname.replace(/^www\.|^m\./,""), p = x.pathname;
+  let id;
+  if (host === "youtu.be") id = p.slice(1).split("/")[0];
+  else if (host === "youtube.com" || host === "music.youtube.com"){
+    if (p === "/watch") id = x.searchParams.get("v");
+    else { const mm = p.match(/^\/(?:shorts|embed|live)\/([\w-]{6,})/); if (mm) id = mm[1]; }
+  }
+  if (id && /^[\w-]{6,15}$/.test(id)) return {kind:"iframe", src:`https://www.youtube-nocookie.com/embed/${id}?rel=0`, ratio: /\/shorts\//.test(p) ? "9/16" : "16/9", thumb:`https://i.ytimg.com/vi/${id}/hqdefault.jpg`};
+  if (host === "drive.google.com"){
+    const mm = p.match(/\/file\/d\/([\w-]+)/) || null; const did = mm ? mm[1] : x.searchParams.get("id");
+    if (did && /^[\w-]+$/.test(did)) return {kind:"iframe", src:`https://drive.google.com/file/d/${did}/preview`, ratio:"16/9"};
+  }
+  if (host === "vimeo.com"){ const mm = p.match(/^\/(?:video\/)?(\d+)/); if (mm) return {kind:"iframe", src:`https://player.vimeo.com/video/${mm[1]}`, ratio:"16/9"}; }
+  if (host === "tiktok.com"){ const mm = p.match(/\/video\/(\d+)/); if (mm) return {kind:"iframe", src:`https://www.tiktok.com/embed/v2/${mm[1]}`, ratio:"9/16", narrow:true}; }
+  if (host === "facebook.com" || host === "fb.watch") return {kind:"iframe", src:`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(u)}&show_text=false`, ratio:"16/9"};
+  if (/\.(mp4|webm|mov)$/i.test(p)) return {kind:"video", src:u};
+  return null;
+}
 function mediaNode(m, alt){
   if (m.type === "image") return el("img",{src:src(m.src), alt: m.cap || alt, loading:"lazy"});
   if (m.type === "video") return el("video",{src:src(m.src), controls:true, playsinline:true, preload:"metadata"});
+  const e = embedInfo(m.src);
+  if (e && e.kind === "video") return el("video",{src:e.src, controls:true, playsinline:true, preload:"metadata"});
+  if (e) return el("div",{class:"embed"+(e.narrow?" narrow":""), style:`aspect-ratio:${e.ratio}`},
+    el("iframe",{src:e.src, title:m.cap || alt || "คลิป", loading:"lazy", allowfullscreen:true, referrerpolicy:"strict-origin-when-cross-origin",
+      allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"}),
+    el("a",{class:"embed-open", href:m.src, target:"_blank", rel:"noopener"}, "เปิดในแท็บใหม่ ↗"));
   return el("a",{class:"btn primary", href:m.src, target:"_blank", rel:"noopener"}, "เปิดวิดีโอ " + (m.cap||""));
 }
 function lineBtn(){ return el("a",{class:"btn", href:"https://line.me/ti/p/~nasa532", target:"_blank", rel:"noopener"}, "ปรึกษาทาง LINE"); }
@@ -839,10 +873,10 @@ function workForm(w, folderId){
   drop.addEventListener("dragover", e => { e.preventDefault(); drop.classList.add("over"); });
   drop.addEventListener("dragleave", () => drop.classList.remove("over"));
   drop.addEventListener("drop", e => { e.preventDefault(); drop.classList.remove("over"); addFiles([...e.dataTransfer.files]); });
-  const vlink = inp("wf-vlink", "", "ลิงก์ YouTube / TikTok / Drive", "url");
+  const vlink = inp("wf-vlink", "", "วางลิงก์คลิป YouTube / TikTok / Drive / Vimeo / Facebook / .mp4", "url");
   const addLink = el("button",{type:"button", class:"btn sm", onclick:()=>{
     const u = vlink.value.trim(); if (!/^https?:\/\//.test(u)){ err.textContent = "ลิงก์ต้องขึ้นต้นด้วย https://"; return; }
-    data.media.push({type:"link", src:u, cap:""}); vlink.value = ""; drawMedia(); }}, "เพิ่มลิงก์");
+    data.media.push({type:"link", src:u, cap:""}); vlink.value = ""; drawMedia(); }}, "ฝังคลิปจากลิงก์");
 
   const confirmBox = el("div",{class:"confirm", hidden:true},
     el("span",{text:`ลบผลงาน “${data.title}”?`}),
