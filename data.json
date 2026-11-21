@@ -1264,6 +1264,42 @@
        "w": 1280,
        "h": 529,
        "cap": "ห้องควบคุม Admin ต้องใส่รหัสก่อนเข้า"
+      },
+      {
+       "src": "media/adm/coursehub-22.jpg",
+       "w": 1280,
+       "h": 529,
+       "cap": "Admin: การเงิน รายชื่อค้างชำระ และรายการรับ-จ่าย เพิ่ม/ลบได้"
+      },
+      {
+       "src": "media/adm/coursehub-23.jpg",
+       "w": 1280,
+       "h": 529,
+       "cap": "Admin: เนื้อหา ประกาศ งาน และบันทึกการประชุมทั้งหมด"
+      },
+      {
+       "src": "media/adm/coursehub-24.jpg",
+       "w": 1280,
+       "h": 529,
+       "cap": "Admin: สมาชิกแต่ละฝ่าย เพิ่มสมาชิกเข้าฝ่ายได้ทันที"
+      },
+      {
+       "src": "media/adm/coursehub-25.jpg",
+       "w": 1280,
+       "h": 529,
+       "cap": "Admin: ผู้ใช้ อนุมัติสมาชิกใหม่ แก้ไข/ลบ และบังคับออกจากระบบทั้งหมด"
+      },
+      {
+       "src": "media/adm/coursehub-26.jpg",
+       "w": 1280,
+       "h": 529,
+       "cap": "Admin: ตำแหน่ง สร้างตำแหน่งเอง และกำหนดให้เป็น Admin Only"
+      },
+      {
+       "src": "media/adm/coursehub-27.jpg",
+       "w": 1280,
+       "h": 529,
+       "cap": "Admin: ระบบ ล้าง Log แก้ชื่อเมนู ตั้งค่าแชร์ออนไลน์ Firebase Sync และติดตั้งเป็นแอป"
       }
      ]
     },
@@ -1271,19 +1307,19 @@
      "title": "คู่มือการใช้งาน",
      "items": [
       {
-       "src": "media/adm/coursehub-22.jpg",
+       "src": "media/adm/coursehub-28.jpg",
        "w": 1280,
        "h": 529,
        "cap": "คู่มือสำหรับสมาชิกทั่วไป"
       },
       {
-       "src": "media/adm/coursehub-23.jpg",
+       "src": "media/adm/coursehub-29.jpg",
        "w": 1280,
        "h": 529,
        "cap": "คู่มือสำหรับหัวหน้าฝ่าย"
       },
       {
-       "src": "media/adm/coursehub-24.jpg",
+       "src": "media/adm/coursehub-30.jpg",
        "w": 1280,
        "h": 529,
        "cap": "คู่มือสำหรับ Admin"
