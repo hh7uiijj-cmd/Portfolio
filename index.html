@@ -986,6 +986,26 @@ function usedPaths(s){ const set = new Set(); s.works.forEach(w => (w.media||[])
 $("#discard").onclick = () => {
   state = clone(saved); pending.clear(); clearDirty(); renderAll(); toast("ยกเลิกการแก้ไขแล้ว");
 };
+async function smallDataURL(blob){
+  const u = URL.createObjectURL(blob);
+  try {
+    const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = u; });
+    for (const [max,q] of [[1600,.8],[1400,.7],[1200,.65],[1000,.55],[800,.5]]){
+      const k = Math.min(1, max/img.naturalWidth, max/img.naturalHeight);
+      const cv = document.createElement("canvas"); cv.width = Math.round(img.naturalWidth*k); cv.height = Math.round(img.naturalHeight*k);
+      cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);
+      const d = cv.toDataURL("image/jpeg", q);
+      if (d.length < 900000) return d;
+    }
+    throw {code:"storage/toolarge", message:"รูปใหญ่เกินไป"};
+  } finally { URL.revokeObjectURL(u); }
+}
+async function resolveFsImages(){
+  const ids = new Set(); (state.works||[]).forEach(w => (w.media||[]).forEach(m => { if (typeof m.src === "string" && m.src.startsWith("fs:") && !localURL.has(m.src)) ids.add(m.src); }));
+  if (!ids.size || !fb) return;
+  await Promise.all([...ids].map(async p => { try { const d = await fb.db.collection("portfolio").doc(p.slice(3)).get(); if (d.exists) localURL.set(p, d.data().data); } catch(e){} }));
+  renderAll();
+}
 $("#save").onclick = async () => {
   const btn = $("#save"); btn.disabled = true;
   try {
@@ -995,10 +1015,23 @@ $("#save").onclick = async () => {
     let n = 0; const todo = [...pending].filter(([p]) => now.has(p));
     for (const [p, blob] of todo){
       n++; btn.textContent = `กำลังอัปโหลด ${n}/${todo.length}…`;
-      const name = "portfolio/" + p.replace(/^media\//, "");
-      const ref = fb.storage.ref(name);
-      await ref.put(blob, {contentType: blob.type || undefined, cacheControl: "public,max-age=31536000"});
-      const url = await ref.getDownloadURL();
+      let url;
+      try {
+        const name = "portfolio/" + p.replace(/^media\//, "");
+        const ref = fb.storage.ref(name);
+        await Promise.race([
+          ref.put(blob, {contentType: blob.type || undefined, cacheControl: "public,max-age=31536000"}),
+          new Promise((_, rej) => setTimeout(() => rej({code:"storage/timeout"}), 20000))
+        ]);
+        url = await ref.getDownloadURL();
+      } catch(se){
+        // Storage not available (not enabled / blocked): keep images inside Firestore instead
+        if (!(blob.type || "").startsWith("image/")) throw {code:"storage/video", message:"วิดีโออัปโหลดไม่ได้ เพราะ Firebase Storage ยังไม่เปิดใช้ (ใช้วิธีวางลิงก์คลิปแทนได้)"};
+        const data = await smallDataURL(blob);
+        const id = "img-" + Math.random().toString(36).slice(2,10) + Date.now().toString(36);
+        await fb.db.collection("portfolio").doc(id).set({data});
+        url = "fs:" + id; localURL.set(url, data);
+      }
       state.works.forEach(w => (w.media||[]).forEach(m => { if (m.src === p) m.src = url; }));
       localURL.set(url, localURL.get(p) || url);
     }
@@ -1093,7 +1126,7 @@ function openLogin(){
   if (fb){
     try {
       const snap = await fb.db.collection("portfolio").doc("main").get();
-      if (snap.exists) useData(snap.data());
+      if (snap.exists){ useData(snap.data()); resolveFsImages(); }
       else { const r = await fetch("data.json", {cache:"no-store"}); if (r.ok) useData(await r.json()); }
     } catch(e){ try { const r = await fetch("data.json", {cache:"no-store"}); if (r.ok) useData(await r.json()); } catch(_){} }
     fb.auth.onAuthStateChanged(u => {
