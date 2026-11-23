@@ -1666,6 +1666,190 @@
    "featured": 2,
    "kicker": "ระบบจัดการสาขา",
    "pitch": "จัดการหลายฝ่ายในที่เดียว แยกสิทธิ์ตามตำแหน่ง มีห้องแชท ห้องเสียง ห้องเก็บเอกสาร การเงิน และมอบหมายงาน"
+  },
+  {
+   "id": "w-tt1",
+   "folder": "video",
+   "title": "คลิป TikTok 1",
+   "sub": "TikTok",
+   "summary": "",
+   "tags": [
+    "TikTok"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "link": "https://vt.tiktok.com/ZSpcMabtL/",
+   "linkLabel": "เปิดใน TikTok",
+   "media": [
+    {
+     "type": "link",
+     "src": "https://vt.tiktok.com/ZSpcMabtL/",
+     "cap": "ดูคลิปบน TikTok"
+    }
+   ]
+  },
+  {
+   "id": "w-tt2",
+   "folder": "video",
+   "title": "คลิป TikTok 2",
+   "sub": "TikTok",
+   "summary": "",
+   "tags": [
+    "TikTok"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "link": "https://vt.tiktok.com/ZSpcMn1cd/",
+   "linkLabel": "เปิดใน TikTok",
+   "media": [
+    {
+     "type": "link",
+     "src": "https://vt.tiktok.com/ZSpcMn1cd/",
+     "cap": "ดูคลิปบน TikTok"
+    }
+   ]
+  },
+  {
+   "id": "w-tt3",
+   "folder": "video",
+   "title": "คลิป TikTok 3",
+   "sub": "TikTok",
+   "summary": "",
+   "tags": [
+    "TikTok"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "link": "https://vt.tiktok.com/ZSpcM75BA/",
+   "linkLabel": "เปิดใน TikTok",
+   "media": [
+    {
+     "type": "link",
+     "src": "https://vt.tiktok.com/ZSpcM75BA/",
+     "cap": "ดูคลิปบน TikTok"
+    }
+   ]
+  },
+  {
+   "id": "w-tt4",
+   "folder": "video",
+   "title": "คลิป TikTok 4",
+   "sub": "TikTok",
+   "summary": "",
+   "tags": [
+    "TikTok"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "link": "https://vt.tiktok.com/ZSpcMy5FG/",
+   "linkLabel": "เปิดใน TikTok",
+   "media": [
+    {
+     "type": "link",
+     "src": "https://vt.tiktok.com/ZSpcMy5FG/",
+     "cap": "ดูคลิปบน TikTok"
+    }
+   ]
+  },
+  {
+   "id": "w-tt5",
+   "folder": "video",
+   "title": "คลิป TikTok 5",
+   "sub": "TikTok",
+   "summary": "",
+   "tags": [
+    "TikTok"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "link": "https://vt.tiktok.com/ZSpcMW8ym/",
+   "linkLabel": "เปิดใน TikTok",
+   "media": [
+    {
+     "type": "link",
+     "src": "https://vt.tiktok.com/ZSpcMW8ym/",
+     "cap": "ดูคลิปบน TikTok"
+    }
+   ]
+  },
+  {
+   "id": "w-tt6",
+   "folder": "video",
+   "title": "คลิป TikTok 6",
+   "sub": "TikTok",
+   "summary": "",
+   "tags": [
+    "TikTok"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "link": "https://vt.tiktok.com/ZSpcMxg9A/",
+   "linkLabel": "เปิดใน TikTok",
+   "media": [
+    {
+     "type": "link",
+     "src": "https://vt.tiktok.com/ZSpcMxg9A/",
+     "cap": "ดูคลิปบน TikTok"
+    }
+   ]
+  },
+  {
+   "id": "w-p66",
+   "folder": "video",
+   "title": "P66",
+   "sub": "วิดีโอ",
+   "summary": "",
+   "tags": [
+    "วิดีโอ"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "link": "https://drive.google.com/file/d/1MalqcJ3Wb8JR6dBezXGKdGDbX4IrObDT/view?usp=sharing",
+   "linkLabel": "เปิดใน Google Drive",
+   "media": [
+    {
+     "type": "link",
+     "src": "https://drive.google.com/file/d/1MalqcJ3Wb8JR6dBezXGKdGDbX4IrObDT/view?usp=sharing",
+     "cap": "P66"
+    }
+   ]
+  },
+  {
+   "id": "w-news-huso",
+   "folder": "video",
+   "title": "ข่าว: งานไหว้ครูและ HUSO Big Show 2569",
+   "sub": "ข่าวมหาวิทยาลัยสวนดุสิต",
+   "summary": "คณะมนุษยศาสตร์และสังคมศาสตร์ จัดงานไหว้ครูและเวทีประกวด HUSO Big Show ประจำปี 2569",
+   "tags": [
+    "ข่าว"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "link": "https://www.dusit.ac.th/home/2026/2092952.html",
+   "linkLabel": "อ่านข่าว",
+   "media": [
+    {
+     "type": "link",
+     "src": "https://www.dusit.ac.th/home/2026/2092952.html",
+     "cap": "อ่านข่าว"
+    }
+   ]
   }
  ]
 }
