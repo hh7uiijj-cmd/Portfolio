@@ -4,7 +4,7 @@
   "brand": "Daonuea",
   "name": "Thanawat Sangnon",
   "tagline": "เล่าโจทย์มา แล้วมาสร้างของที่ใช้งานจริงไปด้วยกัน",
-  "note": "เว็บนี้และผลงานทั้งหมดสร้างด้วย AI",
+  "note": "งานเว็บในพอร์ตนี้สร้างโดยใช้ AI ช่วยเขียนโค้ด",
   "contacts": [
    {
     "label": "LINE",
@@ -53,7 +53,7 @@
    "en": "Infographic",
    "color": "#F0B8C2",
    "layout": "gallery",
-   "desc": "งานสรุปข้อมูลเป็นภาพ"
+   "desc": "อินโฟกราฟิกและโปสเตอร์ประชาสัมพันธ์"
   },
   {
    "id": "motion",
@@ -1693,7 +1693,7 @@
   },
   {
    "id": "w-tt2",
-   "folder": "video",
+   "folder": "motion",
    "title": "จับคู่นักจิตวิทยากับทฤษฎี | ท้าทดสอบความจำ 8 คู่",
    "sub": "TikTok · @psycho67_sdu",
    "summary": "คลิปโปรโมตกิจกรรมทดสอบความจำ “จับคู่นักจิตวิทยากับทฤษฎี” 8 คู่ เล่นผ่าน LINE (เกม Psych-Match)",
@@ -1837,6 +1837,174 @@
      "cap": "P66"
     }
    ]
+  },
+  {
+   "id": "w-photo-grad",
+   "folder": "photo",
+   "title": "งานรับปริญญา",
+   "sub": "ภาพถ่ายกิจกรรม · กองประชาสัมพันธ์ ม.สวนดุสิต",
+   "summary": "บรรยากาศบัณฑิตและผู้ร่วมงานในวันรับปริญญา ถ่ายระหว่างฝึกงานที่กองประชาสัมพันธ์ มหาวิทยาลัยสวนดุสิต",
+   "tags": [
+    "ภาพถ่าย",
+    "งานพิธี"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "media": [
+    {
+     "type": "image",
+     "src": "media/photo-grad-1.jpg",
+     "w": 517,
+     "h": 370
+    },
+    {
+     "type": "image",
+     "src": "media/photo-grad-2.jpg",
+     "w": 517,
+     "h": 370
+    }
+   ]
+  },
+  {
+   "id": "w-photo-fire",
+   "folder": "photo",
+   "title": "กิจกรรมฝึกซ้อมดับเพลิง",
+   "sub": "ภาพถ่ายกิจกรรม · กองประชาสัมพันธ์ ม.สวนดุสิต",
+   "summary": "ภาพจังหวะเคลื่อนไหวของเจ้าหน้าที่ดับเพลิงระหว่างการฝึกซ้อมในมหาวิทยาลัย",
+   "tags": [
+    "ภาพถ่าย",
+    "แอ็กชัน"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "media": [
+    {
+     "type": "image",
+     "src": "media/photo-fire-1.jpg",
+     "w": 517,
+     "h": 370
+    },
+    {
+     "type": "image",
+     "src": "media/photo-fire-2.jpg",
+     "w": 517,
+     "h": 370
+    }
+   ]
+  },
+  {
+   "id": "w-photo-event",
+   "folder": "photo",
+   "title": "บรรยากาศกิจกรรมในมหาวิทยาลัย",
+   "sub": "ภาพถ่ายกิจกรรม · กองประชาสัมพันธ์ ม.สวนดุสิต",
+   "summary": "ภาพบุคคลและบรรยากาศบนเวทีในกิจกรรมของมหาวิทยาลัย",
+   "tags": [
+    "ภาพถ่าย",
+    "กิจกรรม"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "media": [
+    {
+     "type": "image",
+     "src": "media/photo-event-2.jpg",
+     "w": 517,
+     "h": 370
+    },
+    {
+     "type": "image",
+     "src": "media/photo-event-1.jpg",
+     "w": 517,
+     "h": 370
+    }
+   ]
+  },
+  {
+   "id": "w-photo-edit",
+   "folder": "photo",
+   "title": "ตัวอย่างการแต่งรูป ก่อน–หลัง",
+   "sub": "แต่งรูป · Lightroom",
+   "summary": "เทียบภาพก่อนและหลังแต่ง ปรับสี แสง และความคมให้ภาพบนเวทีดูชัดและสดขึ้น",
+   "tags": [
+    "แต่งรูป",
+    "Lightroom"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "media": [
+    {
+     "type": "image",
+     "src": "media/photo-edit-before.jpg",
+     "w": 570,
+     "h": 379,
+     "cap": "ก่อนแต่ง"
+    },
+    {
+     "type": "image",
+     "src": "media/photo-edit-after.jpg",
+     "w": 568,
+     "h": 379,
+     "cap": "หลังแต่ง"
+    }
+   ]
+  },
+  {
+   "id": "w-info-psycho",
+   "folder": "info",
+   "title": "Psycho Match | เปิดแฟ้มลับ จับคู่นักจิตวิทยา",
+   "sub": "โปสเตอร์กิจกรรม · TikTok @psycho67_sdu",
+   "summary": "โปสเตอร์ชวนเล่นเกมจับคู่นักจิตวิทยา ในงานแฟนพันธุ์แท้จิตวิทยา ครั้งที่ 20 : Mission : Mind มี QR ให้สแกนเล่นใน LINE",
+   "tags": [
+    "โปสเตอร์",
+    "Mission : Mind"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "media": [
+    {
+     "type": "image",
+     "src": "media/info-psycho-match.jpg",
+     "w": 800,
+     "h": 1000
+    }
+   ],
+   "link": "https://www.tiktok.com/@psycho67_sdu/photo/7706511320354458901",
+   "linkLabel": "เปิดโพสต์ใน TikTok"
+  },
+  {
+   "id": "w-poster-mm",
+   "folder": "info",
+   "title": "โปสเตอร์รับสมัคร Mission : Mind",
+   "sub": "โปสเตอร์ · Instagram @psycho67_sdu",
+   "summary": "โปสเตอร์เปิดรับสมัครผู้เข้าแข่งขันชั้นปีที่ 1–2 งานแฟนพันธุ์แท้ ครั้งที่ 20 Mission : Mind ภารกิจลับค้นใจ",
+   "tags": [
+    "โปสเตอร์",
+    "Mission : Mind"
+   ],
+   "details": [],
+   "how": [],
+   "system": [],
+   "benefit": [],
+   "media": [
+    {
+     "type": "image",
+     "src": "media/poster-mission-mind.jpg",
+     "w": 800,
+     "h": 1036
+    }
+   ],
+   "link": "https://www.instagram.com/p/DfRyTB3ytl1/",
+   "linkLabel": "เปิดโพสต์ใน Instagram"
   },
   {
    "id": "w-news-huso",
